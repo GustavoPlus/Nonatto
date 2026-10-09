@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Nonatto"
+description = "Um website de delivery de comida premium com curadoria de pratos, apresentação editorial e experiência de pedido sofisticada."
+version = "1.0.0"
+id = "artifacts/nonatto"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22775
+
+[services.development]
+run = "pnpm --filter @workspace/nonatto run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nonatto", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/nonatto/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22775"
+BASE_PATH = "/"
