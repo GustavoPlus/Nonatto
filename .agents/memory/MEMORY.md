@@ -1,0 +1,1 @@
+- [Direção do Nonatto](nonatto-direction.md) — comunicação discreta na página de pedidos; explicações na página Sobre nós; evitar rosé e itálico.
