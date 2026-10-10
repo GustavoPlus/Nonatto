@@ -3,28 +3,48 @@ import { ArrowDown, ArrowRight, ArrowUpRight, Bookmark, Check, ChevronDown, Coff
 import HouseMenu from './HouseMenu';
 
 type Category = 'Restaurantes' | 'Cafés' | 'Doces';
-type Place = { name: string; category: Category; note: string; description: string; mark: string };
+type Place = { name: string; category: Category; note: string; description: string; mark: string; logo: string };
 
 const places: Place[] = [
-  { name: 'Almanara', category: 'Restaurantes', note: 'Cozinha do Levante', description: 'Receitas de família, especiarias delicadas e uma mesa generosa.', mark: 'A' },
-  { name: 'Rascal', category: 'Restaurantes', note: 'Italiana contemporânea', description: 'Clássicos italianos revisitados com leveza e bons ingredientes.', mark: 'R' },
-  { name: 'Barbacoa', category: 'Restaurantes', note: 'Cortes & brasa', description: 'O tempo da brasa, cortes selecionados e acompanhamentos de casa.', mark: 'B' },
-  { name: 'Fasano', category: 'Restaurantes', note: 'Tradição italiana', description: 'Uma cozinha de gestos precisos, massas e receitas atemporais.', mark: 'F' },
-  { name: 'Bacio di Latte', category: 'Doces', note: 'Gelato artesanal', description: 'Gelato de textura sedosa e sabores que pedem uma pausa.', mark: 'B' },
-  { name: 'Fahrenheit', category: 'Restaurantes', note: 'Cozinha de autor', description: 'Ingredientes de estação encontram técnica e personalidade.', mark: 'F' },
-  { name: 'Dengo', category: 'Doces', note: 'Chocolate brasileiro', description: 'Cacau de origem e combinações inspiradas na biodiversidade brasileira.', mark: 'D' },
-  { name: 'Jun Sakamoto', category: 'Restaurantes', note: 'Japonesa contemporânea', description: 'Uma leitura cuidadosa da tradição japonesa e do ingrediente.', mark: 'J' },
-  { name: 'Kopenhagen', category: 'Doces', note: 'Chocolate & confeitaria', description: 'Clássicos da confeitaria feitos para presentear — ou guardar para si.', mark: 'K' },
-  { name: 'Due Couchi', category: 'Restaurantes', note: 'Cozinha italiana', description: 'Sabores italianos de espírito acolhedor e execução cuidadosa.', mark: 'D' },
-  { name: 'Pobre Juan', category: 'Restaurantes', note: 'Parrilla argentina', description: 'A tradição da parrilla, com fogo, cortes e bons encontros.', mark: 'P' },
-  { name: 'Flakes', category: 'Cafés', note: 'Café & brunch', description: 'Um convite para prolongar o café da manhã, a qualquer hora.', mark: 'F' },
-  { name: 'Starbucks', category: 'Cafés', note: 'Café & bebidas', description: 'Bebidas de café e pausas familiares para acompanhar o dia.', mark: 'S' },
-  { name: 'Blaise', category: 'Restaurantes', note: 'Cozinha contemporânea', description: 'Uma cozinha urbana, elegante e guiada pelo prazer de compartilhar.', mark: 'B' },
-  { name: 'The Coffee', category: 'Cafés', note: 'Café de especialidade', description: 'Café feito com atenção, em uma pausa simples e bem cuidada.', mark: 'T' },
+  { name: 'Almanara', category: 'Restaurantes', note: 'Cozinha do Levante', description: 'Receitas de família, especiarias delicadas e uma mesa generosa.', mark: 'A', logo: 'https://almanara.com.br/_2024/wp-content/themes/almanara/img/logo-red.svg' },
+  { name: 'Rascal', category: 'Restaurantes', note: 'Italiana contemporânea', description: 'Clássicos italianos revisitados com leveza e bons ingredientes.', mark: 'R', logo: 'https://www.rascal.com.br/wp-content/uploads/2020/05/logo-rascal.png' },
+  { name: 'Barbacoa', category: 'Restaurantes', note: 'Cortes & brasa', description: 'O tempo da brasa, cortes selecionados e acompanhamentos de casa.', mark: 'B', logo: 'https://www.barbacoa.com.br/wp-content/uploads/2025/06/cropped-favicon-300x300.png' },
+  { name: 'Fasano', category: 'Restaurantes', note: 'Tradição italiana', description: 'Uma cozinha de gestos precisos, massas e receitas atemporais.', mark: 'F', logo: 'https://fasano.com.br/wp-content/themes/fasano/assets/images/logo.svg' },
+  { name: 'Bacio di Latte', category: 'Doces', note: 'Gelato artesanal', description: 'Gelato de textura sedosa e sabores que pedem uma pausa.', mark: 'B', logo: 'https://baciodilatte.com.br/wp-content/themes/baciodilatte/assets/images/logo-vs-new.svg' },
+  { name: 'Fahrenheit', category: 'Restaurantes', note: 'Cozinha de autor', description: 'Ingredientes de estação encontram técnica e personalidade.', mark: 'F', logo: 'https://static.wixstatic.com/media/2d8778_eabf4d2f7c484e028cc3e669d7ef4bed~mv2.png/v1/fill/w_275,h_107,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo-padr%C3%A3o-png.png' },
+  { name: 'Dengo', category: 'Doces', note: 'Chocolate brasileiro', description: 'Cacau de origem e combinações inspiradas na biodiversidade brasileira.', mark: 'D', logo: 'https://dengo.com/cdn/shop/files/logo.png?v=1680542020&width=600' },
+  { name: 'Jun Sakamoto', category: 'Restaurantes', note: 'Japonesa contemporânea', description: 'Uma leitura cuidadosa da tradição japonesa e do ingrediente.', mark: 'J', logo: 'https://www.junsakamoto.com.br/static/reservas_index_static/images/junlogo.png' },
+  { name: 'Pobre Juan', category: 'Restaurantes', note: 'Parrilla argentina', description: 'A tradição da parrilla, com fogo, cortes e bons encontros.', mark: 'P', logo: 'https://pobrejuan.com.br/assets/images/logo.svg' },
+  { name: 'Starbucks', category: 'Cafés', note: 'Café & bebidas', description: 'Bebidas de café e pausas familiares para acompanhar o dia.', mark: 'S', logo: 'https://cdn-cms-sbux.zamp.com.br//favcon_512_323208f0d8/favcon_512_323208f0d8.png?v=1779807899318' },
+  { name: 'Blaise', category: 'Restaurantes', note: 'Cozinha contemporânea', description: 'Uma cozinha urbana, elegante e guiada pelo prazer de compartilhar.', mark: 'B', logo: 'https://blaise.com.br/wp-content/uploads/2024/06/logo_blaise-05-e1720706724793.png' },
+  { name: 'The Coffee', category: 'Cafés', note: 'Café de especialidade', description: 'Café feito com atenção, em uma pausa simples e bem cuidada.', mark: 'T', logo: 'https://thecoffee.jp/favicon.png' },
 ];
 
 const categories = ['Todos', 'Restaurantes', 'Cafés', 'Doces'] as const;
 type Filter = typeof categories[number];
+
+function PlaceLogo({ place }: { place: Place }) {
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <div className="nm-place-logo-frame">
+      {!hasError ? (
+        <img
+          className="nm-place-logo"
+          src={place.logo}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={() => setHasError(true)}
+        />
+      ) : (
+        <span className="nm-place-logo-fallback" role="img" aria-label={`Marca de ${place.name}`}>{place.mark}</span>
+      )}
+    </div>
+  );
+}
 
 export function Marketplace() {
   const [query, setQuery] = useState('');
@@ -119,7 +139,9 @@ export function Marketplace() {
         .nm-place-card { position: relative; display: flex; min-height: 205px; flex-direction: column; align-items: flex-start; padding: 22px 21px 18px; border: 1px solid #d9d2c6; background: #f7f3eb; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
         .nm-place-card:hover { transform: translateY(-3px); border-color: #b8ad9e; box-shadow: 0 12px 28px #20392e0d; }
         .nm-card-top { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 14px; }
-        .nm-place-monogram { display: grid; width: 39px; height: 39px; flex: 0 0 auto; place-items: center; border: 1px solid #d3c9b9; color: var(--nm-terracotta); font-family: 'Playfair Display', Georgia, serif; font-size: 19px; font-style: italic; }
+        .nm-place-logo-frame { display: grid; width: 96px; height: 42px; flex: 0 0 96px; place-items: center start; overflow: hidden; border: 1px solid #d3c9b9; background: #fbf8f2; padding: 4px 7px; }
+        .nm-place-logo { display: block; max-width: 100%; max-height: 100%; object-fit: contain; object-position: left center; }
+        .nm-place-logo-fallback { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid #d3c9b9; color: var(--nm-terracotta); font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-style: italic; }
         .nm-place-category { color: #7d8279; font-size: 8px; letter-spacing: .13em; text-align: right; text-transform: uppercase; }
         .nm-favorite { display: grid; width: 31px; height: 31px; flex: 0 0 auto; place-items: center; border: 1px solid transparent; background: transparent; color: #777f75 !important; transition: color .2s ease, background .2s ease; }
         .nm-favorite:hover, .nm-favorite.is-saved { color: var(--nm-terracotta) !important; background: #f0e7dd; }
@@ -292,7 +314,7 @@ export function Marketplace() {
             {visiblePlaces.length > 0 ? visiblePlaces.map(place => (
               <article className="nm-place-card" key={place.name}>
                 <div className="nm-card-top">
-                  <div className="nm-place-monogram" aria-hidden="true">{place.mark}</div>
+                  <PlaceLogo place={place} />
                   <span className="nm-place-category">{place.category}</span>
                   <button type="button" className={`nm-favorite ${favorites.includes(place.name) ? 'is-saved' : ''}`} aria-label={favorites.includes(place.name) ? `Remover ${place.name} da sua lista` : `Salvar ${place.name} na sua lista`} aria-pressed={favorites.includes(place.name)} onClick={() => toggleFavorite(place.name)}><Heart size={16} fill={favorites.includes(place.name) ? 'currentColor' : 'none'} strokeWidth={1.5} /></button>
                 </div>
