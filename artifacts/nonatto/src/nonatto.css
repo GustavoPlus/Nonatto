@@ -184,6 +184,12 @@
 .nm-order{width:min(100%,560px);max-height:92dvh;overflow:auto}
 .nm-order h2{font-size:32px}
 .nm-order small,.nm-fine{color:#4d5c52;font-size:10px}
+.nm-founder{margin-top:28px;padding:30px;border:1px solid var(--nm-line);background:var(--nm-card)}
+.nm-founder .nm-kicker{color:#4d5c52}
+.nm-founder h2{margin:12px 0 0;font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:500}
+.nm-founder-phone{display:block;width:fit-content;margin-top:12px;color:var(--nm-ink);font-size:14px}
+.nm-founder-whatsapp{display:inline-block;margin-top:12px;padding-bottom:4px;border-bottom:1px solid var(--nm-ink);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:620px){.nm-founder{padding:23px}.nm-points{grid-template-columns:1fr}}
 .nm-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid var(--nm-line)}
 .nm-item b{display:block;font-weight:600;font-size:13px}
 .nm-item span{display:block;margin-top:3px;color:#4d5c52;font-size:11px;line-height:1.5}
