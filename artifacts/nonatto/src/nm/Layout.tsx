@@ -4,10 +4,30 @@ import { Menu, X } from 'lucide-react';
 import '../nonatto.css';
 
 const links = [
-  { href: '/', label: 'Pedir' },
+  { href: '/', label: 'Início' },
+  { href: '/pedir', label: 'Pedir' },
   { href: '/sobre-nos', label: 'Sobre nós' },
   { href: '/parcerias', label: 'Parcerias' },
 ];
+
+const seoByPath: Record<string, { title: string; description: string }> = {
+  '/': {
+    title: 'Nonatto — delivery com curadoria',
+    description: 'Nonatto é delivery com curadoria: restaurantes escolhidos, cozinha de excelência e uma experiência de entrega cuidada em cada detalhe.',
+  },
+  '/pedir': {
+    title: 'Pedir | Nonatto — restaurantes selecionados',
+    description: 'Explore restaurantes selecionados pelo Nonatto, conheça suas opções e escolha entre pedir agora ou agendar a entrega.',
+  },
+  '/sobre-nos': {
+    title: 'Sobre nós | Nonatto — delivery com curadoria',
+    description: 'Conheça o Nonatto: delivery com curadoria fundado em Natal, sua operação e os princípios que orientam cada escolha.',
+  },
+  '/parcerias': {
+    title: 'Parcerias | Nonatto — eventos e experiências',
+    description: 'O Nonatto está aberto a parcerias com empresas para jantares corporativos, eventos, festas e cerimônias.',
+  },
+};
 
 export function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
@@ -15,6 +35,13 @@ export function Layout({ children }: { children: ReactNode }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     setOpen(false);
+    const seo = seoByPath[location] ?? seoByPath['/'];
+    document.title = seo.title;
+    document.querySelector<HTMLMetaElement>('meta[name="description"]')?.setAttribute('content', seo.description);
+    document.querySelector<HTMLMetaElement>('meta[property="og:title"]')?.setAttribute('content', seo.title);
+    document.querySelector<HTMLMetaElement>('meta[property="og:description"]')?.setAttribute('content', seo.description);
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')?.setAttribute('content', seo.title);
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]')?.setAttribute('content', seo.description);
   }, [location]);
   const cur = (h: string) => (location === h ? 'page' : undefined);
   return (

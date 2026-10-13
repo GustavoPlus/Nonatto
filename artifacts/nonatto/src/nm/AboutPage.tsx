@@ -11,6 +11,12 @@ export function AboutPage() {
       <h1 className="nm-serif">Menos, e melhor.</h1>
       <p className="nm-lead">O Nonatto é um aplicativo de delivery com curadoria, pensado para quem valoriza a qualidade acima da quantidade. Da seleção das cozinhas ao cuidado na entrega, cada escolha tem uma intenção.</p>
       <div className="nm-points">{pts.map(([t, d]) => <div className="nm-point" key={t}><h3>{t}</h3><p>{d}</p></div>)}</div>
+      <section className="nm-founder" aria-labelledby="nm-founder-name" data-testid="section-founder-contact">
+        <div className="nm-kicker">Fundador</div>
+        <h2 id="nm-founder-name">Gustavo Soares</h2>
+        <a className="nm-founder-phone" href="tel:+5584994106895" data-testid="link-founder-phone">+55 (84) 99410-6895</a>
+        <a className="nm-founder-whatsapp" href="https://wa.me/5584994106895" target="_blank" rel="noopener noreferrer" data-testid="link-founder-whatsapp">WhatsApp ↗</a>
+      </section>
     </main>
   );
 }
