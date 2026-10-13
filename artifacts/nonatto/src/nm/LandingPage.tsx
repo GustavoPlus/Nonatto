@@ -31,11 +31,11 @@ export function LandingPage() {
             <p className="n-hero-intro">
               Comida escolhida com cuidado. Um convite a aproveitar melhor o momento, à mesa ou onde você estiver.
             </p>
-            <Link href="/pedir" className="n-button">
+            <Link href="/pedir" className="n-button" data-testid="link-landing-pedir-hero">
               Descubra a seleção <ArrowRight aria-hidden="true" size={16} />
             </Link>
             <div className="n-hero-foot">
-              <span>Natal, Rio Grande do Norte</span>
+              <span>Fundado em Natal, RN, 2026</span>
               <span className="n-foot-rule" aria-hidden="true" />
               <span>Curadoria Nonatto</span>
             </div>
@@ -46,7 +46,7 @@ export function LandingPage() {
             <span className="n-image-stamp" aria-hidden="true">N.</span>
           </figure>
         </div>
-        <a className="n-scroll-cue" href="#manifesto">
+        <a className="n-scroll-cue" href="#manifesto" data-testid="link-landing-manifesto">
           <span>Uma outra forma de escolher</span><ArrowDown aria-hidden="true" size={14} />
         </a>
       </section>
@@ -57,7 +57,7 @@ export function LandingPage() {
           <h2 id="n-manifesto-title">Menos opções.<br /><span>Mais intenção.</span></h2>
           <div className="n-manifesto-aside">
             <p>O Nonatto acredita que pedir bem começa antes da primeira garfada. Começa por saber escolher.</p>
-            <Link href="/sobre-nos" className="n-text-link">Conheça o Nonatto <ArrowUpRight aria-hidden="true" size={15} /></Link>
+            <Link href="/sobre-nos" className="n-text-link" data-testid="link-landing-about">Conheça o Nonatto <ArrowUpRight aria-hidden="true" size={15} /></Link>
           </div>
         </div>
         <div className="n-rule" />
@@ -73,7 +73,7 @@ export function LandingPage() {
           <p className="n-eyebrow">Um convite, não uma lista</p>
           <h2 id="n-table-title">Para a mesa<br />que você <span>imagina.</span></h2>
           <p>Um jantar sem pressa. Um almoço que vira encontro. Ou simplesmente o prazer de comer algo muito bom, hoje.</p>
-          <Link href="/pedir" className="n-text-link">Ver o que está à mesa <ArrowUpRight aria-hidden="true" size={15} /></Link>
+          <Link href="/pedir" className="n-text-link" data-testid="link-landing-pedir-table">Ver o que está à mesa <ArrowUpRight aria-hidden="true" size={15} /></Link>
         </div>
       </section>
 
@@ -97,7 +97,7 @@ export function LandingPage() {
         <div className="n-last-copy">
           <p className="n-eyebrow">A mesa está posta</p>
           <h2 id="n-last-title">Escolha com<br />mais <span>calma.</span></h2>
-          <Link href="/pedir" className="n-button n-button-light">Explore a seleção <ArrowRight aria-hidden="true" size={16} /></Link>
+          <Link href="/pedir" className="n-button n-button-light" data-testid="link-landing-pedir-footer">Explore a seleção <ArrowRight aria-hidden="true" size={16} /></Link>
         </div>
         <div className="n-last-aside">
           <span className="n-last-mark" aria-hidden="true">N</span>
