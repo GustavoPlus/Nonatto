@@ -8,12 +8,14 @@ type Filter = typeof categories[number];
 
 function PlaceLogo({ place }: { place: Restaurant }) {
   const [hasError, setHasError] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
   return (
     <div className={`nm-place-logo-frame${place.id === 'pobre-juan' ? ' nm-place-logo-frame--dark' : ''}`}>
-      {!hasError ? (
-        <img className="nm-place-logo" src={place.logo} alt="" aria-hidden="true" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={() => setHasError(true)} />
-      ) : (
-        <span className="nm-place-logo-fallback" role="img" aria-label={`Marca de ${place.name}`}>{place.name.charAt(0)}</span>
+      {!hasLoaded && (
+        <span className="nm-place-logo-fallback" role="img" aria-label={`Marca de ${place.name}`}>{place.name}</span>
+      )}
+      {!!place.logo && !hasError && (
+        <img className="nm-place-logo" src={place.logo} alt="" aria-hidden="true" loading="lazy" decoding="async" referrerPolicy="no-referrer" onLoad={() => setHasLoaded(true)} onError={() => setHasError(true)} />
       )}
     </div>
   );
@@ -40,7 +42,7 @@ export function Marketplace() {
 
   return (
     <main id="nm-top">
-      <section className="nm-hero nm-wrap" aria-labelledby="nm-title">
+      <section className="nm-hero nm-hero--type-only nm-wrap" aria-labelledby="nm-title">
         <div className="nm-hero-copy">
           <div className="nm-kicker">Pedir</div>
           <h1 className="nm-serif" id="nm-title">O raro também<br />pode <em>chegar.</em></h1>
@@ -51,13 +53,6 @@ export function Marketplace() {
             {query && <button type="button" className="nm-search-clear" aria-label="Limpar busca" onClick={() => setQuery('')}><X size={15} /></button>}
           </label>
           <button type="button" className="nm-hero-action" onClick={jump}>Ver a seleção <ArrowDown size={14} /></button>
-        </div>
-        <div className="nm-hero-photo">
-          <img src="/hero-prato.jpg" alt="Vieira delicadamente selada com ervas frescas em prato artesanal" />
-          <div className="nm-photo-caption">
-            <div className="nm-kicker">Curadoria, sem pressa</div>
-            <p>Um ingrediente no ponto.<br />Uma escolha com intenção.</p>
-          </div>
         </div>
       </section>
 
@@ -106,8 +101,7 @@ export function Marketplace() {
         </div>
       </section>
 
-      <section className="nm-editorial nm-wrap" aria-labelledby="nm-manifesto-title">
-        <div className="nm-editorial-image"><img src="/massa-prato.jpg" alt="Massa fresca servida em prato artesanal com folhas e queijo" /></div>
+      <section className="nm-editorial nm-editorial--type-only nm-wrap" aria-labelledby="nm-manifesto-title">
         <div className="nm-editorial-copy">
           <div className="nm-kicker">Um ponto de vista</div>
           <h2 className="nm-serif" id="nm-manifesto-title">Não é sobre ter mais.<br /><em>É sobre escolher melhor.</em></h2>

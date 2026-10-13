@@ -43,7 +43,6 @@ export function LandingPage() {
           <figure className="n-hero-image">
             <img src="/hero-prato.jpg" alt="Prato cuidadosamente apresentado com vieira dourada, folhas frescas e molho verde" />
             <figcaption><span>01 / 03</span><span>O prazer está nos detalhes</span></figcaption>
-            <span className="n-image-stamp" aria-hidden="true">N.</span>
           </figure>
         </div>
         <a className="n-scroll-cue" href="#manifesto" data-testid="link-landing-manifesto">
@@ -98,10 +97,6 @@ export function LandingPage() {
           <p className="n-eyebrow">A mesa está posta</p>
           <h2 id="n-last-title">Escolha com<br />mais <span>calma.</span></h2>
           <Link href="/pedir" className="n-button n-button-light" data-testid="link-landing-pedir-footer">Explore a seleção <ArrowRight aria-hidden="true" size={16} /></Link>
-        </div>
-        <div className="n-last-aside">
-          <span className="n-last-mark" aria-hidden="true">N</span>
-          <p>Nonatto<br />Comer bem é um jeito de estar.</p>
         </div>
       </section>
     </main>
