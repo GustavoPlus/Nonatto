@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, Minus, Plus, X } from 'lucide-react';
 import type { Restaurant } from '../catalog';
-import { earliestReservation, validateReservation } from '../order-utils';
+import { earliestReservation, latestReservation, randomDeliveryFee, validateReservation } from '../order-utils';
 
 const brl = (n: number) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 type Step = 'menu' | 'checkout' | 'done';
@@ -14,6 +14,8 @@ export function OrderDialog({ restaurant, onClose }: { restaurant: Restaurant; o
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState('');
   const [minimumArrival, setMinimumArrival] = useState(() => earliestReservation());
+  const [maximumArrival, setMaximumArrival] = useState(() => latestReservation());
+  const [deliveryFee] = useState(() => randomDeliveryFee());
   const dialogRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -30,7 +32,10 @@ export function OrderDialog({ restaurant, onClose }: { restaurant: Restaurant; o
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
     };
-    const timer = window.setInterval(() => setMinimumArrival(earliestReservation()), 30_000);
+    const timer = window.setInterval(() => {
+      setMinimumArrival(earliestReservation());
+      setMaximumArrival(latestReservation());
+    }, 30_000);
     window.addEventListener('keydown', k);
     return () => {
       window.removeEventListener('keydown', k);
@@ -41,7 +46,8 @@ export function OrderDialog({ restaurant, onClose }: { restaurant: Restaurant; o
   }, [onClose]);
 
   const lines = useMemo(() => restaurant.items.filter(i => (qty[i.id] ?? 0) > 0), [restaurant, qty]);
-  const total = lines.reduce((s, i) => s + i.price * (qty[i.id] ?? 0), 0);
+  const subtotal = lines.reduce((s, i) => s + i.price * (qty[i.id] ?? 0), 0);
+  const total = subtotal + deliveryFee;
   const count = lines.reduce((s, i) => s + (qty[i.id] ?? 0), 0);
   const change = (id: string, d: number) => setQty(q => ({ ...q, [id]: Math.max(0, (q[id] ?? 0) + d) }));
 
@@ -75,21 +81,23 @@ export function OrderDialog({ restaurant, onClose }: { restaurant: Restaurant; o
               </div>
             </div>))}
           </div>
-          <div className="nm-total"><span>{count} {count === 1 ? 'item' : 'itens'}</span><span>{brl(total)}</span></div>
+          <div className="nm-total"><span>{count} {count === 1 ? 'item' : 'itens'}</span><span>{brl(subtotal)}</span></div>
           <button type="button" className="nm-modal-action" disabled={count === 0} style={count === 0 ? { opacity: .45 } : undefined} onClick={() => setStep('checkout')}>Continuar</button>
         </>)}
 
         {step === 'checkout' && (<>
           <div style={{ marginTop: 12 }}>{lines.map(i => <div className="nm-item" key={i.id}><b>{qty[i.id]} × {i.name}</b><span>{brl(i.price * qty[i.id])}</span></div>)}</div>
-          <div className="nm-total"><span>Total</span><span>{brl(total)}</span></div>
+          <div className="nm-item"><b>Subtotal</b><span>{brl(subtotal)}</span></div>
+          <div className="nm-item"><b>Frete</b><span>{brl(deliveryFee)}</span></div>
+          <div className="nm-total"><span>Total com entrega</span><span>{brl(total)}</span></div>
           <div className="nm-radio" role="group" aria-label="Quando">
             <button type="button" className="nm-chip" aria-pressed={mode === 'now'} onClick={() => { setMode('now'); setError(null); }}>Pedido imediato</button>
             <button type="button" className="nm-chip" aria-pressed={mode === 'reserve'} onClick={() => { setMode('reserve'); setWhen(earliestReservation()); }}>Reserva</button>
           </div>
           {mode === 'reserve' && (
             <label className="nm-field">Data e hora de chegada
-              <input type="datetime-local" value={when} min={minimumArrival} onChange={e => { setWhen(e.target.value); setError(null); }} />
-              <span className="nm-fine">Antecedência mínima de 3h30.</span>
+              <input type="datetime-local" value={when} min={minimumArrival} max={maximumArrival} onChange={e => { setWhen(e.target.value); setError(null); }} />
+              <span className="nm-fine">Entre 3h30 e 7 dias de antecedência.</span>
             </label>)}
           {error && <p className="nm-error" role="alert">{error}</p>}
           <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
@@ -99,7 +107,10 @@ export function OrderDialog({ restaurant, onClose }: { restaurant: Restaurant; o
         </>)}
 
         {step === 'done' && (<>
-          <p style={{ marginTop: 12 }}><Check size={14} style={{ verticalAlign: -2 }} /> {result} · {restaurant.name} · {count} {count === 1 ? 'item' : 'itens'} · {brl(total)}</p>
+          <p style={{ marginTop: 12 }}><Check size={14} style={{ verticalAlign: -2 }} /> {result} · {restaurant.name} · {count} {count === 1 ? 'item' : 'itens'}</p>
+          <div className="nm-item"><b>Subtotal</b><span>{brl(subtotal)}</span></div>
+          <div className="nm-item"><b>Frete</b><span>{brl(deliveryFee)}</span></div>
+          <div className="nm-total"><span>Total com entrega</span><span>{brl(total)}</span></div>
           <div className="nm-notice" role="status">Demonstração: nada foi enviado, cobrado ou reservado.</div>
           <button type="button" className="nm-modal-action" onClick={onClose}>Fechar</button>
         </>)}
