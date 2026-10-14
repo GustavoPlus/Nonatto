@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "gV_79kC3kL4MKkVsCZdmc"
+uri = "file://artifacts/nonatto/public/nonatto-logo.svg"
+type = "image"
+title = "Logotipo Nonatto"
+description = "Logo vetorial em SVG com o wordmark verde usado no cabeçalho."
+logical_id = "0e6911fc-b5b9-43ad-b51b-364c7b641628"
+content_hash = "sha256:24216e6caaf1c4d2d7d93761331e28f6c382c27409dca489b99add53386d36e1"
+size = 350
+mtime_ms = 1792021023594
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:7d19bf4f-0a23-42f8-85c6-aa9551cff2ab/0e6911fc-b5b9-43ad-b51b-364c7b641628/d524df85-c1f8-47c9-9ac5-b1d487dba732"
+storage_version_token = "1792021052854809"
+content_type = "image/svg+xml"
