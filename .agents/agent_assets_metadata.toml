@@ -14,3 +14,45 @@ mtime_ms = 1792021023594
 storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:7d19bf4f-0a23-42f8-85c6-aa9551cff2ab/0e6911fc-b5b9-43ad-b51b-364c7b641628/d524df85-c1f8-47c9-9ac5-b1d487dba732"
 storage_version_token = "1792021052854809"
 content_type = "image/svg+xml"
+
+[[outputs]]
+id = "4PQf6vfqLOMeyEPG1_Ol4"
+uri = "file://artifacts/nonatto/public/nonatto-logo.png"
+type = "image"
+title = "Logo Nonatto — PNG"
+description = "Logotipo em verde, com fundo branco, em alta resolução (1200 × 400)."
+logical_id = "ee2136c0-45f1-4bab-a736-b889453a2502"
+content_hash = "sha256:85c0745b8d3c825c179a2d8f5b865548e9e722bd9fcf77fdcfa96f9e7714907a"
+size = 24398
+mtime_ms = 1792021482501
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:7d19bf4f-0a23-42f8-85c6-aa9551cff2ab/ee2136c0-45f1-4bab-a736-b889453a2502/38f9fbff-3176-41cb-8cf4-0f0c59e7778c"
+storage_version_token = "1792021698224497"
+content_type = "image/png"
+
+[[outputs]]
+id = "4y_mUJosklGvsMLitRVH1"
+uri = "file://artifacts/nonatto/public/favicon.png"
+type = "image"
+title = "Ícone da aba — PNG"
+description = "Versão quadrada do logotipo Nonatto para favicon e ícone de tela inicial (512 × 512)."
+logical_id = "61ca4ec3-aa23-4456-859b-4802bbedb9ee"
+content_hash = "sha256:b5b28a1a38545199519af7865da927a7308becee89aafdaf9cb91683a4b09752"
+size = 75114
+mtime_ms = 1792021602676
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:7d19bf4f-0a23-42f8-85c6-aa9551cff2ab/61ca4ec3-aa23-4456-859b-4802bbedb9ee/88f6e3ef-db60-4d29-8a69-a0ea3c6eaf4c"
+storage_version_token = "1792021698908388"
+content_type = "image/png"
+
+[[outputs]]
+id = "CTASjfv8wxIIxIMJvdMQH"
+uri = "file://artifacts/nonatto/public/nonatto-og.png"
+type = "image"
+title = "Prévia de compartilhamento — PNG"
+description = "Imagem Open Graph 1200 × 630 configurada para a prévia do link."
+logical_id = "a1ce5be3-b6b3-4a2b-a49d-20479c3381c3"
+content_hash = "sha256:631549b427dc49bf7bed3830b970ea7c469802894d9ef3057a6700e7df9e7a85"
+size = 112379
+mtime_ms = 1792021492972
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:7d19bf4f-0a23-42f8-85c6-aa9551cff2ab/a1ce5be3-b6b3-4a2b-a49d-20479c3381c3/33a39d61-04ba-4448-beeb-05aa14201c65"
+storage_version_token = "1792021699563578"
+content_type = "image/png"
