@@ -20,7 +20,7 @@ const principles = [
   },
 ];
 
-export function LandingPage({ demoBase = '/demo' }: { demoBase?: string }) {
+export function LandingPage({ demoBase = '' }: { demoBase?: string }) {
   const demoHref = (path: string) => `${demoBase}${path}`;
   return (
     <main className="n-landing">

@@ -5,9 +5,9 @@ import '../nonatto.css';
 
 const rootLinks = [
   { href: '/', label: 'Início' },
-  { href: '/demo/pedir', label: 'Pedir' },
-  { href: '/demo/sobre-nos', label: 'Sobre nós' },
-  { href: '/demo/parcerias', label: 'Parcerias' },
+  { href: '/pedir', label: 'Pedir' },
+  { href: '/sobre-nos', label: 'Sobre nós' },
+  { href: '/parcerias', label: 'Parcerias' },
   { href: '/demo', label: 'Demonstração' },
 ];
 
@@ -27,6 +27,18 @@ const seoByPath: Record<string, { title: string; description: string }> = {
   '/demo': {
     title: 'Demonstração | Nonatto — delivery com curadoria',
     description: 'Conheça a demonstração do Nonatto: restaurantes selecionados, pedidos e agendamentos em uma experiência de delivery com curadoria.',
+  },
+  '/pedir': {
+    title: 'Pedir | Nonatto — restaurantes selecionados',
+    description: 'Explore restaurantes selecionados pelo Nonatto, conheça suas opções e escolha entre pedir agora ou agendar a entrega.',
+  },
+  '/sobre-nos': {
+    title: 'Sobre nós | Nonatto — delivery com curadoria',
+    description: 'Conheça o Nonatto: delivery com curadoria fundado em Natal, sua operação e os princípios que orientam cada escolha.',
+  },
+  '/parcerias': {
+    title: 'Parcerias | Nonatto — eventos e experiências',
+    description: 'O Nonatto está aberto a parcerias com empresas para jantares corporativos, eventos, festas e cerimônias.',
   },
   '/demo/pedir': {
     title: 'Pedir | Nonatto — restaurantes selecionados',
