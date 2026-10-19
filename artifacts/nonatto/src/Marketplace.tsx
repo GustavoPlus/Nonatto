@@ -21,7 +21,7 @@ function PlaceLogo({ place }: { place: Restaurant }) {
   );
 }
 
-export function Marketplace() {
+export function Marketplace({ showCatalog = true }: { showCatalog?: boolean }) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<Filter>('Todos');
   const [favoritesOnly, setFavoritesOnly] = useState(false);
@@ -29,12 +29,13 @@ export function Marketplace() {
   const [selected, setSelected] = useState<Restaurant | null>(null);
 
   const visible = useMemo(() => {
+    const availablePlaces = showCatalog ? restaurants : [];
     const q = query.trim().toLocaleLowerCase('pt-BR');
-    return restaurants.filter(p =>
+    return availablePlaces.filter(p =>
       (!q || `${p.name} ${p.category} ${p.note}`.toLocaleLowerCase('pt-BR').includes(q)) &&
       (category === 'Todos' || p.category === category) &&
       (!favoritesOnly || favorites.includes(p.id)));
-  }, [query, category, favoritesOnly, favorites]);
+  }, [showCatalog, query, category, favoritesOnly, favorites]);
 
   const toggleFavorite = (id: string) => setFavorites(c => c.includes(id) ? c.filter(i => i !== id) : [...c, id]);
   const reset = () => { setQuery(''); setCategory('Todos'); setFavoritesOnly(false); };
@@ -47,11 +48,13 @@ export function Marketplace() {
           <div className="nm-kicker">Pedir</div>
           <h1 className="nm-serif" id="nm-title">O raro também<br />pode <em>chegar.</em></h1>
           <p className="nm-hero-intro">Escolha um lugar. Peça agora ou agende sua entrega.</p>
-          <label className="nm-search">
-            <Search size={17} strokeWidth={1.6} aria-hidden="true" />
-            <input type="search" aria-label="Buscar estabelecimentos ou cozinhas" placeholder="Busque um lugar ou uma cozinha" value={query} onChange={e => setQuery(e.target.value)} />
-            {query && <button type="button" className="nm-search-clear" aria-label="Limpar busca" onClick={() => setQuery('')}><X size={15} /></button>}
-          </label>
+          {showCatalog && (
+            <label className="nm-search">
+              <Search size={17} strokeWidth={1.6} aria-hidden="true" />
+              <input type="search" aria-label="Buscar estabelecimentos ou cozinhas" placeholder="Busque um lugar ou uma cozinha" value={query} onChange={e => setQuery(e.target.value)} />
+              {query && <button type="button" className="nm-search-clear" aria-label="Limpar busca" onClick={() => setQuery('')}><X size={15} /></button>}
+            </label>
+          )}
           <button type="button" className="nm-hero-action" onClick={jump}>Ver a seleção <ArrowDown size={14} /></button>
         </div>
       </section>
@@ -61,20 +64,24 @@ export function Marketplace() {
           <div className="nm-section-top">
             <div><div className="nm-kicker">Seleção</div><h2 className="nm-serif" id="nm-discovery-title">Lugares que têm<br /><em>algo a dizer.</em></h2></div>
           </div>
-          <div className="nm-controls">
-            <div className="nm-categories" role="group" aria-label="Filtrar por categoria">
-              {categories.map(c => <button type="button" key={c} className="nm-chip" aria-pressed={category === c} onClick={() => setCategory(c)}>{c}</button>)}
-            </div>
-            <button type="button" className="nm-fav-filter" aria-pressed={favoritesOnly} onClick={() => setFavoritesOnly(v => !v)}>
-              <Bookmark size={13} fill={favoritesOnly ? 'currentColor' : 'none'} /> {favoritesOnly ? 'Ver todos' : 'Minha lista'}{favorites.length > 0 && <span>· {favorites.length}</span>}
-            </button>
-          </div>
-          <div className="nm-results-line" aria-live="polite">
-            <span><strong>{visible.length}</strong> {visible.length === 1 ? 'lugar' : 'lugares'}</span>
-            {(query || category !== 'Todos' || favoritesOnly) && <button type="button" className="nm-card-link" onClick={reset}>Limpar filtros <X size={12} /></button>}
-          </div>
+          {showCatalog && (
+            <>
+              <div className="nm-controls">
+                <div className="nm-categories" role="group" aria-label="Filtrar por categoria">
+                  {categories.map(c => <button type="button" key={c} className="nm-chip" aria-pressed={category === c} onClick={() => setCategory(c)}>{c}</button>)}
+                </div>
+                <button type="button" className="nm-fav-filter" aria-pressed={favoritesOnly} onClick={() => setFavoritesOnly(v => !v)}>
+                  <Bookmark size={13} fill={favoritesOnly ? 'currentColor' : 'none'} /> {favoritesOnly ? 'Ver todos' : 'Minha lista'}{favorites.length > 0 && <span>· {favorites.length}</span>}
+                </button>
+              </div>
+              <div className="nm-results-line" aria-live="polite">
+                <span><strong>{visible.length}</strong> {visible.length === 1 ? 'lugar' : 'lugares'}</span>
+                {(query || category !== 'Todos' || favoritesOnly) && <button type="button" className="nm-card-link" onClick={reset}>Limpar filtros <X size={12} /></button>}
+              </div>
+            </>
+          )}
           <div className="nm-grid">
-            {visible.length > 0 ? visible.map(p => {
+            {showCatalog ? (visible.length > 0 ? visible.map(p => {
               const saved = favorites.includes(p.id);
               return (
                 <article className="nm-place-card" key={p.id}>
@@ -95,6 +102,10 @@ export function Marketplace() {
                 <h3>Nenhum lugar por aqui.</h3>
                 <p>{favoritesOnly && favorites.length === 0 ? 'Salve um lugar para vê-lo aqui.' : 'Tente outro nome ou categoria.'}</p>
                 <button type="button" onClick={reset}>Ver todos os lugares</button>
+              </div>
+            )) : (
+              <div className="nm-empty" role="status">
+                <h3>Uma nova seleção, em breve.</h3>
               </div>
             )}
           </div>

@@ -12,10 +12,10 @@ export default function App() {
       <Switch>
         <Route path="/" component={() => <LandingPage />} />
         <Route path="/demo" component={() => <LandingPage demoBase="/demo" />} />
-        <Route path="/pedir" component={Marketplace} />
+        <Route path="/pedir" component={() => <Marketplace showCatalog={false} />} />
         <Route path="/sobre-nos" component={AboutPage} />
         <Route path="/parcerias" component={PartnershipsPage} />
-        <Route path="/demo/pedir" component={Marketplace} />
+        <Route path="/demo/pedir" component={() => <Marketplace showCatalog />} />
         <Route path="/demo/sobre-nos" component={AboutPage} />
         <Route path="/demo/parcerias" component={PartnershipsPage} />
         <Route component={NotFoundPage} />
