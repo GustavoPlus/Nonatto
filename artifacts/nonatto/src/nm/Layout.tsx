@@ -3,11 +3,20 @@ import { Link, useLocation } from 'wouter';
 import { Menu, X } from 'lucide-react';
 import '../nonatto.css';
 
-const links = [
+const rootLinks = [
   { href: '/', label: 'Início' },
-  { href: '/pedir', label: 'Pedir' },
-  { href: '/sobre-nos', label: 'Sobre nós' },
-  { href: '/parcerias', label: 'Parcerias' },
+  { href: '/demo/pedir', label: 'Pedir' },
+  { href: '/demo/sobre-nos', label: 'Sobre nós' },
+  { href: '/demo/parcerias', label: 'Parcerias' },
+  { href: '/demo', label: 'Demonstração' },
+];
+
+const demoLinks = [
+  { href: '/demo', label: 'Demonstração' },
+  { href: '/demo/pedir', label: 'Pedir' },
+  { href: '/demo/sobre-nos', label: 'Sobre nós' },
+  { href: '/demo/parcerias', label: 'Parcerias' },
+  { href: '/', label: 'Site principal' },
 ];
 
 const seoByPath: Record<string, { title: string; description: string }> = {
@@ -15,15 +24,19 @@ const seoByPath: Record<string, { title: string; description: string }> = {
     title: 'Nonatto — delivery com curadoria',
     description: 'Nonatto é delivery com curadoria: restaurantes escolhidos, cozinha de excelência e uma experiência de entrega cuidada em cada detalhe.',
   },
-  '/pedir': {
+  '/demo': {
+    title: 'Demonstração | Nonatto — delivery com curadoria',
+    description: 'Conheça a demonstração do Nonatto: restaurantes selecionados, pedidos e agendamentos em uma experiência de delivery com curadoria.',
+  },
+  '/demo/pedir': {
     title: 'Pedir | Nonatto — restaurantes selecionados',
     description: 'Explore restaurantes selecionados pelo Nonatto, conheça suas opções e escolha entre pedir agora ou agendar a entrega.',
   },
-  '/sobre-nos': {
+  '/demo/sobre-nos': {
     title: 'Sobre nós | Nonatto — delivery com curadoria',
     description: 'Conheça o Nonatto: delivery com curadoria fundado em Natal, sua operação e os princípios que orientam cada escolha.',
   },
-  '/parcerias': {
+  '/demo/parcerias': {
     title: 'Parcerias | Nonatto — eventos e experiências',
     description: 'O Nonatto está aberto a parcerias com empresas para jantares corporativos, eventos, festas e cerimônias.',
   },
@@ -32,6 +45,9 @@ const seoByPath: Record<string, { title: string; description: string }> = {
 export function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
+  const inDemo = location === '/demo' || location.startsWith('/demo/');
+  const links = inDemo ? demoLinks : rootLinks;
+  const homeHref = inDemo ? '/demo' : '/';
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     setOpen(false);
@@ -48,7 +64,7 @@ export function Layout({ children }: { children: ReactNode }) {
     <div className="nm-marketplace">
       <div className="nm-topline">Uma seleção pequena. Uma noite que fica.</div>
       <header className="nm-header nm-wrap">
-        <Link href="/" className="nm-wordmark" aria-label="Nonatto, início">nonatto<span>.</span></Link>
+        <Link href={homeHref} className="nm-wordmark" aria-label={inDemo ? 'Nonatto, início da demonstração' : 'Nonatto, início'}>nonatto<span>.</span></Link>
         <nav className="nm-nav" aria-label="Navegação principal">
           {links.map(l => <Link key={l.href} href={l.href} aria-current={cur(l.href)}>{l.label}</Link>)}
         </nav>
